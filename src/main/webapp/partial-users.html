@@ -1,0 +1,57 @@
+<h2>Usuários</h2>
+<div class="row">
+    <form class="form-horizontal">
+        <fieldset>
+            <input type="hidden" value="" ng-model="user.id">
+            <div class="form-group">
+                <label class="col-lg-1 control-label">Name : </label>
+                <div class="col-lg-4">         
+                    <input type="text" class="form-control" ng-model="user.name">
+                </div> 
+            </div>
+            <div class="form-group">
+                <label class="col-lg-1 control-label">Email : </label>
+                <div class="col-lg-4"> 
+                    <input type="text" class="form-control" ng-model="user.email"> 
+                </div>
+            </div>
+            <div class="form-group col-lg-4">
+                <button ng-click="postUser()" class="btn btn-success dropdown-toggle">Cadastrar</button>
+                <button ng-click="putUser()" class="btn btn-primary dropdown-toggle" disabled="disabled">Editar</button>
+            </div>
+        </fieldset>
+    </form>
+</div>
+<!--
+<div class="row">
+    <pre>{{user}}</pre>
+</div>
+-->
+<div class="row">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Options</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="user in users">
+                <td>{{user.id}}</td>
+                <td>{{user.name}}</td>
+                <td>{{user.email}}</td>
+                <td>
+                    <a href="#" ng-click="edit(user)" >
+                        <span class="label label-info">editar</span>
+                    </a> 
+                    |
+                    <a href="#" ng-click="deleteUser(user)">
+                        <span class="label label-danger">remover</span>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
