@@ -17,16 +17,16 @@ umaDicaApp.config(function($stateProvider, $urlRouterProvider) {
                 templateUrl: 'partial-home.html'
             })
 
-            .state('users', {
-                url: '/users',
-                templateUrl: 'partial-users.html',
+            .state('usuarios', {
+                url: '/usuarios',
+                templateUrl: 'partial-usuarios.html',
                 controller: 'userController'
             });
 
 
 })
 
-        .controller('userController', ['$scope', '$window', '$http', function($scope, $window, $http) {
+        .controller('userController', ['$scope', '$window', '$http', '$injector', function($scope, $window, $http, $injector) {
                 var init = function() {
                     $http.get('/UmaDica/users/').success(function(data) {
                         $scope.users = data;
@@ -35,7 +35,6 @@ umaDicaApp.config(function($stateProvider, $urlRouterProvider) {
 
                 $scope.postUser = function() {
                     var user = angular.toJson({user: $scope.user});
-
                     $http.post('/UmaDica/users/', user)
                             .success(function(data) {
                                 console.log(user);
