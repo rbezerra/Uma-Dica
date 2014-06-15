@@ -1,16 +1,28 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
-</html>
+<div class="row text-center">
+    <select class="text-center" ng-model="selectedUser" ng-options="user.is as user.name for user in users">
+
+    </select>
+</div>
+<div class="row">
+    <div class="col-lg-2">
+        <button class="btn btn-success">Nova Dica</button>
+    </div>
+    <div id="buttons" class="col-lg-6">
+        <div class="jumbotron center-block"></div>
+        <div class="text-center">
+            <button class="btn btn-danger btn-lg"><span class="glyphicon glyphicon-thumbs-down"></span></button>
+            <button class="btn btn-success btn-lg"><span class="glyphicon glyphicon-thumbs-up"></span></button>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <h3>Dicas Anteriores</h3>
+        <table class="table table-condensed table-hover">
+            <thead>
+                <tr>
+                    <td>Filme</td>
+                    <td>Ano</td>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>

@@ -14,7 +14,8 @@ umaDicaApp.config(function($stateProvider, $urlRouterProvider) {
 
             .state('home', {
                 url: '/home',
-                templateUrl: 'partial-home.html'
+                templateUrl: 'partial-home.html',
+                controller: 'userController'
             })
 
             .state('usuarios', {
