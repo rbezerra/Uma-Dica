@@ -1,16 +1,37 @@
 <div class="row text-center">
-    <select class="text-center" ng-model="selectedUser" ng-options="user.is as user.name for user in users">
-
+    <select class="btn-inverse" ng-model="selectedUser" ng-options="user.is as user.name for user in users">
     </select>
 </div>
 <div class="row">
-    <div class="col-lg-2">
-        <button class="btn btn-success">Nova Dica</button>
-    </div>
-    <div id="buttons" class="col-lg-6">
-        <div class="jumbotron center-block"></div>
-        <div class="text-center">
-            <button class="btn btn-danger btn-lg"><span class="glyphicon glyphicon-thumbs-down"></span></button>
+    <div id="movie" class="col-lg-8">
+        <div class="jumbotron center-block">
+            
+            <div ng-hide="filme" ng-click="buscarFilme()" class="text-center">
+                <button class="btn btn-lg"><span class="glyphicon glyphicon-film"></span> 
+                    Clique para receber uma dica! 
+                    <span class="glyphicon glyphicon-film"></span></button>
+            </div>
+            
+            <div ng-show="filme">
+                <div class="row">
+                    <img class="col-lg-4" ng-src="{{filme.Poster}}">
+                    <div class="col-lg-8">
+                        <h3 class="text-left" ng-show="filme">{{filme.Title}} ({{filme.Year}})</h3>
+                        <span class="duracao">{{filme.Runtime}} - {{filme.Genre}} - {{filme.Released}}</span><br>
+                        <span>Nota no IMDb: {{filme.imdbRating}}</span><br>
+                        <span>Elenco: {{filme.Actors}}</span><br>
+                        <span>Direção: {{filme.Director}}</span>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <span>{{filme.Plot}}</span>
+                </div>
+
+            </div>
+        </div>
+        <div id="buttons" class="text-center">
+            <button class="btn btn-danger btn-lg" ng-click="buscarFilme()"><span class="glyphicon glyphicon-thumbs-down"></span></button>
             <button class="btn btn-success btn-lg"><span class="glyphicon glyphicon-thumbs-up"></span></button>
         </div>
     </div>

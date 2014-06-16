@@ -8,3 +8,11 @@ and open the template in the editor.
     Author     : rbezerra
 */
 
+#buttons {
+    padding-bottom: 30px;
+}
+
+.sinopse{
+    top: 30px;
+    padding-top: 100px;
+}
