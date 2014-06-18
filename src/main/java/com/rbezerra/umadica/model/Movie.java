@@ -6,29 +6,25 @@
 
 package com.rbezerra.umadica.model;
 
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
  *
  * @author rbezerra
  */
 
-@Document
+
 public class Movie {
-    
-  
-    
+        
     @Indexed
     protected String imdbID;
     
-    private String title;
-    private String director;
-    private String year;
+    private String Title;
+    private String Director;
+    private String Year;
     private Double imdbRating;
-    private String plot;
-    private String [] actors;
+    private String Plot;
+    private String Actors;
 
     public String getImdbID() {
         return imdbID;
@@ -39,27 +35,27 @@ public class Movie {
     }
 
     public String getTitle() {
-        return title;
+        return Title;
     }
 
     public void setTitle(String title) {
-        this.title = title;
+        this.Title = title;
     }
 
     public String getDirector() {
-        return director;
+        return Director;
     }
 
     public void setDirector(String director) {
-        this.director = director;
+        this.Director = director;
     }
 
     public String getYear() {
-        return year;
+        return Year;
     }
 
     public void setYear(String year) {
-        this.year = year;
+        this.Year = year;
     }
 
     public Double getImdbRating() {
@@ -71,24 +67,24 @@ public class Movie {
     }
 
     public String getPlot() {
-        return plot;
+        return Plot;
     }
 
     public void setPlot(String plot) {
-        this.plot = plot;
+        this.Plot = plot;
     }
 
-    public String[] getActors() {
-        return actors;
+    public String getActors() {
+        return Actors;
     }
 
-    public void setActors(String[] actors) {
-        this.actors = actors;
+    public void setActors(String actors) {
+        this.Actors = actors;
     }
 
     @Override
     public String toString() {
-        return "Movie{" + "imdbID=" + imdbID + ", title=" + title + ", director=" + director + ", year=" + year + ", imdbRating=" + imdbRating + ", plot=" + plot + ", actors=" + actors + '}';
+        return "Movie{" + "imdbID=" + imdbID + ", title=" + Title + ", director=" + Director + ", year=" + Year + ", imdbRating=" + imdbRating + ", plot=" + Plot + ", actors=" + Actors + '}';
     }
     
     

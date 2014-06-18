@@ -31,20 +31,26 @@ umaDicaApp.config(function($stateProvider, $urlRouterProvider) {
                 var init = function() {
                     $http.get('/UmaDica/users/').success(function(data) {
                         $scope.users = data;
+                        console.log($scope.users);
                     });
                 }();
+                
+                var refresh = function(){
+                     $http.get('/UmaDica/users/').success(function(data) {
+                        $scope.users = data;
+                    });
+                };
 
                 $scope.postUser = function() {
                     var user = angular.toJson({user: $scope.user});
+                    user.tips = [];
                     $http.post('/UmaDica/users/', user)
                             .success(function(data) {
-                                console.log(user);
                                 $scope.users.unshift(data);
                                 reset();
+                                refresh();
                             })
                             .error(function(data) {
-                                console.log(user);
-                                console.log(data);
                             });
                 };
 
@@ -86,14 +92,61 @@ umaDicaApp.config(function($stateProvider, $urlRouterProvider) {
                 };
 
                 $scope.buscarFilme = function() {
-                    var posArray = Math.floor(Math.random()*250);
+                    var posArray = Math.floor(Math.random() * 250);
                     var numfilme = ids[posArray];
-                    //console.log('posArray: '+posArray);
-                    //console.log('numfilme: '+numfilme);
-                    $http.get('http://www.omdbapi.com/?i='+numfilme).success(function(data){
+                    $http.get('http://www.omdbapi.com/?i=' + numfilme).success(function(data) {
                         $scope.filme = data;
+                         $("#saveButton").removeAttr("disabled");
+                         $("#refreshButton").removeAttr("disabled");
                     });
+
+                };
+
+                $scope.updateUserData = function(userId) {
+                    $http.get('/UmaDica/users/' + userId).success(function(data) {
+                        $scope.userHome = data;
+                        if($scope.userHome.tips){
+                            $scope.oldTipsFill = true;
+                        }else{
+                            $scope.oldTipsFill = false;
+                        }
+                    });
+                };
+
+                $scope.salvarDica = function() {
+                    var movie = $scope.filme;
+                    var date = new Date();
+                    var dia = date.getDate();
+                    var mes = date.getMonth()+1;
+                    var ano = date.getFullYear();
                     
+                    var stringDate = dia+"/"+mes+"/"+ano;
+                    var tip = {
+                        "movie": movie,
+                        "date": stringDate
+
+                    };
+                    //tip = angular.toJson(tip);
+                    if (typeof $scope.userHome.tips === 'undefined') {
+                        $scope.userHome.tips = [];
+                        $scope.userHome.tips.push(tip);
+
+
+                    } else {
+                        $scope.userHome.tips.push(tip);
+                    }
+
+                    var url = '/UmaDica/users/',
+                            user = angular.toJson({user: $scope.userHome});
+                    $http.put(url, user).success(function(data) {
+                        $http.get('/UmaDica/users/' + $scope.userHome.id).success(function(data) {
+                            $scope.userHome = data;
+                            if(!$scope.oldTipsFill){$scope.oldTipsFill=true;}
+                        });
+                        $("#saveButton").attr("disabled","disabled");
+                    }).error(function(data) {
+                        console.log(data);
+                    });
                 };
 
                 var ids = [

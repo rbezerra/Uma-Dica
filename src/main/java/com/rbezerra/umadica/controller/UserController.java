@@ -19,7 +19,6 @@ import com.rbezerra.umadica.model.User;
 import com.rbezerra.umadica.repository.UserRepository;
 import java.util.Arrays;
 import java.util.List;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -27,7 +26,6 @@ import javax.swing.JOptionPane;
  */
 @Resource
 @Path("/users")
-
 public class UserController {
 
     private final UserRepository repository;
@@ -42,7 +40,6 @@ public class UserController {
     @Path("/")
     @Consumes("application/json")
     public void save(User user) {
-        JOptionPane.showMessageDialog(null,user.toString());
         try {
             this.repository.save(user);
         }catch(Exception e){
@@ -56,7 +53,6 @@ public class UserController {
     @Path("/")
     @Consumes("application/json")
     public void update(User user) {
-        JOptionPane.showMessageDialog(null,user.toString());
         this.repository.save(user);
 
         this.result.use(status()).ok();
@@ -76,7 +72,7 @@ public class UserController {
         
         final User user = this.repository.findOne(id);
 
-        this.result.use(json()).withoutRoot().from(user).serialize();
+        this.result.use(json()).withoutRoot().from(user).recursive().serialize();
     }
 
     @Get
@@ -85,7 +81,7 @@ public class UserController {
 
         final List<User> users = this.repository.findAll();
 
-        this.result.use(json()).withoutRoot().from(users).serialize();
+        this.result.use(json()).withoutRoot().from(users).recursive().serialize();
     }
 
 }

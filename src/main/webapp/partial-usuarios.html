@@ -3,6 +3,7 @@
     <form class="form-horizontal">
         <fieldset>
             <input type="hidden" value="" ng-model="user.id">
+            <input type="hidden" value="" ng-model="user.tips">
             <div class="form-group">
                 <label class="col-lg-1 control-label">Nome : </label>
                 <div class="col-lg-4">         
@@ -34,6 +35,7 @@
                 <th>Id</th>
                 <th>Nome</th>
                 <th>Email</th>
+                <th>Qtd. de Dicas</th>
                 <th>Opções</th>
             </tr>
         </thead>
@@ -42,6 +44,7 @@
                 <td>{{user.id}}</td>
                 <td>{{user.name}}</td>
                 <td>{{user.email}}</td>
+                <td>{{user.tips.length || 0}}</td>
                 <td>
                     <a href="#" ng-click="edit(user)" >
                         <span class="label label-info">editar</span>

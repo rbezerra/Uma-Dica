@@ -18,6 +18,8 @@
     <context-param>
         <param-name>br.com.caelum.vraptor.packages</param-name>
         <param-value>
+            br.com.caelum.vraptor.deserialization.gson,  
+            br.com.caelum.vraptor.serialization.gson     
         </param-value>
     </context-param>
 

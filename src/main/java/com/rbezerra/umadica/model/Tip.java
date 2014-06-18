@@ -8,8 +8,6 @@ package com.rbezerra.umadica.model;
 
 import java.util.Date;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
  *
@@ -22,10 +20,8 @@ public class Tip {
     @Id
     protected String id;
     
-  
-    private Movie filme;
-    private boolean curtiu;
-    private Date data;
+    private Movie movie;
+    private String date;
 
     public String getId() {
         return id;
@@ -36,32 +32,24 @@ public class Tip {
     }
 
     public Movie getFilme() {
-        return filme;
+        return movie;
     }
 
     public void setFilme(Movie filme) {
-        this.filme = filme;
+        this.movie = filme;
     }
 
-    public boolean isCurtiu() {
-        return curtiu;
+    public String getData() {
+        return date;
     }
 
-    public void setCurtiu(boolean curtiu) {
-        this.curtiu = curtiu;
-    }
-
-    public Date getData() {
-        return data;
-    }
-
-    public void setData(Date data) {
-        this.data = data;
+    public void setData(String Data) {
+        this.date = Data;
     }
 
     @Override
     public String toString() {
-        return "Tip{" + "id=" + id + ", filme=" + filme.toString() + ", curtiu=" + curtiu + ", data=" + data + '}';
+        return "Tip{" + "id=" + id + ", filme=" + movie.toString() + ", data=" + date + '}';
     }
     
     

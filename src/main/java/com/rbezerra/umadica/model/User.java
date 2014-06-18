@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.rbezerra.umadica.model;
 
+import java.util.List;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -14,20 +14,19 @@ import org.springframework.data.mongodb.core.mapping.Document;
  *
  * @author rbezerra
  */
-
-@Document(collection="Users")
+@Document(collection = "Users")
 public class User {
 
     public User() {
-    } 
+    }
     @Id
     protected String id;
-    
+
     @Indexed(unique = true)
     protected String email;
     private String name;
-    private Tip [] dicas;
-
+    
+    private List<Tip> tips;
 
     public String getEmail() {
         return email;
@@ -45,12 +44,12 @@ public class User {
         this.name = name;
     }
 
-    public Tip[] getDicas() {
-        return dicas;
+    public List<Tip> getTips() {
+        return tips;
     }
 
-    public void setDicas(Tip[] dicas) {
-        this.dicas = dicas;
+    public void setTips(List<Tip> tips) {
+        this.tips = tips;
     }
 
     public String getId() {
@@ -60,14 +59,10 @@ public class User {
     public void setId(String id) {
         this.id = id;
     }
-    
-    
 
     @Override
     public String toString() {
-        return "User{" + "id=" + id + ", email=" + email + ", name=" + name + ", dicas=" + dicas + '}';
+        return "User{" + "id=" + id + ", email=" + email + ", name=" + name + ", tips=" + tips.toString() + '}';
     }
-    
-    
-    
+
 }

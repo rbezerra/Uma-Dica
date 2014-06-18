@@ -1,38 +1,53 @@
 <div class="row text-center">
-    <select class="btn-inverse" ng-model="selectedUser" ng-options="user.is as user.name for user in users">
-    </select>
+    <div class="col-lg-4 selectUser">
+        <select class="form-control" ng-model="userId" ng-change="updateUserData(userId)" ng-options="user.id as user.name for user in users">
+            <option value="" ng-hide="userId">Usuários</option>
+        </select>
+    </div>
+
 </div>
+<!--<pre>{{userHome | json}}</pre>-->
 <div class="row">
     <div id="movie" class="col-lg-8">
         <div class="jumbotron center-block">
-            
-            <div ng-hide="filme" ng-click="buscarFilme()" class="text-center">
-                <button class="btn btn-lg"><span class="glyphicon glyphicon-film"></span> 
-                    Clique para receber uma dica! 
-                    <span class="glyphicon glyphicon-film"></span></button>
+            <div ng-hide="userHome" class="text-center">
+                <h3>
+                    <span class="glyphicon glyphicon-film"></span> 
+                    Selecione um usuário! 
+                    <span class="glyphicon glyphicon-film"></span>
+                </h3>
             </div>
-            
-            <div ng-show="filme">
-                <div class="row">
-                    <img class="col-lg-4" ng-src="{{filme.Poster}}">
-                    <div class="col-lg-8">
-                        <h3 class="text-left" ng-show="filme">{{filme.Title}} ({{filme.Year}})</h3>
-                        <span class="duracao">{{filme.Runtime}} - {{filme.Genre}} - {{filme.Released}}</span><br>
-                        <span>Nota no IMDb: {{filme.imdbRating}}</span><br>
-                        <span>Elenco: {{filme.Actors}}</span><br>
-                        <span>Direção: {{filme.Director}}</span>
-                    </div>
-                </div>
-                <br>
-                <div class="row">
-                    <span>{{filme.Plot}}</span>
+            <div ng-show="userHome">
+                <div ng-hide="filme" ng-click="buscarFilme()" class="text-center">
+                    <button class="btn btn-lg">
+                        <span class="glyphicon glyphicon-film"></span> 
+                        Clique para receber uma dica! 
+                        <span class="glyphicon glyphicon-film"></span>
+                    </button>
                 </div>
 
+                <div ng-show="filme">
+                    <div class="row">
+                        <img class="col-lg-4" ng-src="{{filme.Poster}}">
+                        <div class="col-lg-8">
+                            <h3 class="text-left" ng-show="filme">{{filme.Title}} ({{filme.Year}})</h3>
+                            <span class="duracao">{{filme.Runtime}} - {{filme.Genre}} - {{filme.Released}}</span><br>
+                            <span>Nota no IMDb: {{filme.imdbRating}}</span><br>
+                            <span>Elenco: {{filme.Actors}}</span><br>
+                            <span>Direção: {{filme.Director}}</span>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <span>{{filme.Plot}}</span>
+                    </div>
+
+                </div>
             </div>
         </div>
-        <div id="buttons" class="text-center">
-            <button class="btn btn-danger btn-lg" ng-click="buscarFilme()"><span class="glyphicon glyphicon-thumbs-down"></span></button>
-            <button class="btn btn-success btn-lg"><span class="glyphicon glyphicon-thumbs-up"></span></button>
+        <div class="buttons text-center" ng-show="userHome">
+            <button class="btn btn-danger btn-lg"  id="refreshButton" ng-click="buscarFilme()" disabled="disabled"><span class="glyphicon glyphicon-refresh"></span></button>
+            <button class="btn btn-success btn-lg" id="saveButton" ng-click="salvarDica()" disabled="disabled"><span class="glyphicon glyphicon-thumbs-up"></span></button>
         </div>
     </div>
     <div class="col-lg-4">
@@ -44,6 +59,20 @@
                     <td>Ano</td>
                 </tr>
             </thead>
+            <tbody>
+                <tr class="text-warning" ng-hide="oldTipsFill === true" ng-show="oldTipsFill === false" >
+                    <td>
+                        <label>Nenhuma dica foi aceita ainda </label>
+                    </td>
+                    <td>
+                        :(
+                    </td>
+                </tr>
+                <tr ng-repeat="tip in userHome.tips">
+                    <td>{{tip.movie.Title}}</td>
+                    <td>{{tip.date}}</td>
+                </tr>
+            </tbody>
         </table>
     </div>
 </div>
